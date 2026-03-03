@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão SEE TECH</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #2f3b52, #1fa3b8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .card {
+      background: white;
+      color: #2f3b52;
+      width: 350px;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+    .qrcodes {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+    .qr {
+      text-align: center;
+    }
+    canvas {
+      width: 120px !important;
+      height: 120px !important;
+    }
+    .links a {
+      display: block;
+      margin: 5px 0;
+      color: #1fa3b8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="seetechmini.png" class="logo" alt="SEE TECH">
+    <h1 style="display: none;">SEE TECH</h1>
+    <p>Serviços em Informática e Treinamento Ltda</p>
+
+    <div class="qrcodes">
+      <div class="qr">
+        <canvas id="siteQR"></canvas>
+        <p>Website</p>
+      </div>
+      <div class="qr">
+        <canvas id="whatsQR"></canvas>
+        <p>WhatsApp</p>
+      </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 class="text-xl font-bold mb-4">Eduardo Bacarine Lobato</h3>
+                <p class="text-gray-600 mb-4">CEO e Diretor de Tecnologia da Informação</p>
+                  <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/eblseetech/" target="_blank" aria-label="Facebook" class="text-gray-400 hover:text-white transition duration-300">
+                      <i class="fab fa-facebook-f">ACEBOOK</i>
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.instagram.com/prof_eduardolobato/" target="_blank" aria-label="Instagram" class="text-gray-400 hover:text-white transition duration-300">
+                      <i class="fab fa-instagram">INSTAGRAM</i>
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.linkedin.com/in/eduardoblobato/" target="_blank" aria-label="LinkedIn" class="text-gray-400 hover:text-white transition duration-300">
+                      <i class="fab fa-linkedin-in">LINKEDIN</i>
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+            </div>
+          </div>
+        </div>
+    </footer>
+
+  <script>
+    QRCode.toCanvas(document.getElementById('siteQR'), 'https://www.seetech.com.br/');
+    QRCode.toCanvas(document.getElementById('whatsQR'), 'https://api.whatsapp.com/send?l=pt&phone=5511982160046');
+  </script>
+</body>
+</html>
