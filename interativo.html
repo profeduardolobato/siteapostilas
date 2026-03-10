@@ -1,161 +1,284 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SEE TECH | Cartão Digital</title>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  background: 
-    linear-gradient(rgba(47,59,82,0.85), rgba(31,163,184,0.85)),
-    url('computers.webp') no-repeat center/cover;
+body{
 
-  animation: fadeIn 1.2s ease-in-out;
+font-family:'Segoe UI',sans-serif;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+min-height:100vh;
+
+background:
+
+linear-gradient(rgba(47,59,82,0.85), rgba(31,163,184,0.85)),
+url('computers.webp') center/cover no-repeat;
+
+animation:fadeIn 1.2s ease;
+
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
 }
 
-.card {
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 25px;
-  width: 360px;
-  text-align: center;
-  color: white;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+.card{
 
-  transform: translateY(30px);
-  animation: slideUp 0.8s ease forwards;
+width:380px;
+max-width:92vw;
+
+min-height:90vh;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:space-between;
+
+backdrop-filter:blur(14px);
+
+background:rgba(255,255,255,0.08);
+
+border-radius:24px;
+
+padding:28px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 15px 45px rgba(0,0,0,0.4);
+
+animation:slideUp .8s ease forwards;
+
 }
 
-@keyframes slideUp {
-  to {
-    transform: translateY(0);
-  }
+@keyframes slideUp{
+from{transform:translateY(40px);}
+to{transform:translateY(0);}
 }
 
-.logo {
-  width: 110px;
-  margin-bottom: 10px;
+.logo{
+width:140px;
+margin-bottom:10px;
 }
 
-h1 {
-  font-size: 22px;
-  margin-bottom: 5px;
+.subtitle{
+
+font-size:14px;
+opacity:.9;
+
 }
 
-.subtitle {
-  font-size: 13px;
-  opacity: 0.85;
-  margin-bottom: 15px;
+.name{
+
+font-weight:bold;
+font-size:20px;
+margin-top:6px;
+
 }
 
-.name {
-  font-weight: bold;
-  font-size: 18px;
+.role{
+
+font-size:14px;
+opacity:.8;
+margin-bottom:18px;
+
 }
 
-.role {
-  font-size: 13px;
-  opacity: 0.8;
-  margin-bottom: 20px;
+.qrcodes{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+
 }
 
-.qrcodes {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+.qr{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
 }
 
-.qr {
-  text-align: center;
-  transition: transform 0.3s;
+.qr-box{
+
+width:140px;
+height:140px;
+
+background:white;
+
+border-radius:12px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 5px 18px rgba(0,0,0,0.25);
+
 }
 
-.qr:hover {
-  transform: scale(1.1);
+.qr p{
+
+margin-top:6px;
+font-size:12px;
+
 }
 
-canvas {
-  width: 110px !important;
-  height: 110px !important;
-  border-radius: 10px;
-  background: white;
-  padding: 5px;
+.socials{
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+gap:14px;
+
+margin-top:15px;
+
 }
 
-.qr p {
-  margin-top: 8px;
-  font-size: 12px;
+.socials a{
+
+color:white;
+font-size:24px;
+
+transition:.3s;
+
 }
 
-.socials a {
-  margin: 0 8px;
-  color: white;
-  font-size: 18px;
-  transition: 0.3s;
+.socials a:hover{
+
+color:#1fa3b8;
+transform:scale(1.2);
+
 }
 
-.socials a:hover {
-  color: #1fa3b8;
-}
 </style>
+
 </head>
 
 <body>
 
 <div class="card">
-  <img src="seetechmini.png" class="logo">
 
-  <h1>SEE TECH</h1>
-  <p class="subtitle">Serviços em Informática & Treinamentos</p>
+<img src="seetech.svg" class="logo">
 
-  <p class="name">Eduardo Bacarine Lobato</p>
-  <p class="role">CEO & Diretor de Tecnologia</p>
+<p class="subtitle">Serviços em Informática & Treinamentos</p>
 
-  <div class="qrcodes">
-    <div class="qr">
-      <canvas id="siteQR"></canvas>
-      <p>Website</p>
-    </div>
+<p class="name">Eduardo Bacarine Lobato</p>
+<p class="role">CEO & Diretor de Tecnologia</p>
 
-    <div class="qr">
-      <canvas id="whatsQR"></canvas>
-      <p>WhatsApp</p>
-    </div>
-  </div>
+<div class="qrcodes">
 
-  <div class="socials">
-    <a href="https://www.facebook.com/eblseetech/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.instagram.com/prof_eduardolobato/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.linkedin.com/in/eduardoblobato/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-  </div>
+<div class="qr">
+<div class="qr-box">
+<canvas id="siteQR"></canvas>
+</div>
+<p>Website</p>
+</div>
+
+<div class="qr">
+<div class="qr-box">
+<canvas id="whatsQR"></canvas>
+</div>
+<p>WhatsApp</p>
+</div>
+
+<div class="qr">
+<div class="qr-box">
+<canvas id="cardQR"></canvas>
+</div>
+<p>Cartão Digital</p>
+</div>
+
+<div class="qr">
+<div class="qr-box">
+<canvas id="pixQR"></canvas>
+</div>
+<p>PIX</p>
+</div>
+
+</div>
+
+<div class="socials">
+
+<a href="https://www.facebook.com/eblseetech/" target="_blank">
+<i class="fab fa-facebook-f"></i>
+</a>
+
+<a href="https://www.instagram.com/prof_eduardolobato/" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://www.linkedin.com/in/eduardoblobato/" target="_blank">
+<i class="fab fa-linkedin-in"></i>
+</a>
+
+<a href="https://www.seetech.com.br" target="_blank">
+<i class="fas fa-globe"></i>
+</a>
+
+<a href="mailto:eb.lobato74@gmail.com">
+<i class="fas fa-envelope"></i>
+</a>
+
+</div>
 
 </div>
 
 <script>
-QRCode.toCanvas(document.getElementById('siteQR'), 'https://www.seetech.com.br/');
-QRCode.toCanvas(document.getElementById('whatsQR'), 'https://api.whatsapp.com/send?l=pt&phone=5511982160046');
+
+const config = {
+width:120,
+margin:1
+}
+
+QRCode.toCanvas(
+document.getElementById("siteQR"),
+"https://www.seetech.com.br/",
+config
+)
+
+QRCode.toCanvas(
+document.getElementById("whatsQR"),
+"https://api.whatsapp.com/send?phone=5511982160046",
+config
+)
+
+QRCode.toCanvas(
+document.getElementById("cardQR"),
+"https://profeduardolobato.github.io/siteapostilas/interativo",
+config
+)
+
+QRCode.toCanvas(
+document.getElementById("pixQR"),
+"pix:254584598-14",
+config
+)
+
 </script>
 
 </body>

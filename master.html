@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SEE TECH | Cartão Digital</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1fa3b8">
+
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+min-height:100vh;
+
+background:
+linear-gradient(135deg,rgba(10,20,40,0.9),rgba(31,163,184,0.85)),
+url('computers.webp') center/cover no-repeat;
+
+color:white;
+
+}
+
+.card{
+
+width:390px;
+max-width:94vw;
+
+min-height:92vh;
+
+padding:28px;
+
+border-radius:26px;
+
+backdrop-filter:blur(18px);
+
+background:rgba(255,255,255,0.08);
+
+box-shadow:0 25px 60px rgba(0,0,0,0.5);
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+text-align:center;
+
+animation:entrada 1s ease;
+
+}
+
+@keyframes entrada{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.logo{
+width:150px;
+margin-bottom:10px;
+}
+
+.avatar{
+
+width:90px;
+height:90px;
+
+border-radius:50%;
+
+border:3px solid rgba(255,255,255,0.5);
+
+margin:10px 0;
+
+object-fit:cover;
+
+}
+
+.subtitle{
+font-size:14px;
+opacity:0.9;
+}
+
+.name{
+font-size:20px;
+font-weight:bold;
+margin-top:6px;
+}
+
+.role{
+font-size:14px;
+opacity:0.8;
+margin-bottom:14px;
+}
+
+.buttons{
+
+display:flex;
+gap:12px;
+margin-bottom:18px;
+
+}
+
+.btn{
+
+padding:10px 16px;
+
+border-radius:30px;
+
+background:#1fa3b8;
+
+color:white;
+
+font-size:14px;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.08);
+background:#1490a3;
+
+}
+
+.qrcodes{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:18px;
+
+margin-top:10px;
+
+}
+
+.qr{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+}
+
+.qrbox{
+
+width:130px;
+height:130px;
+
+background:white;
+
+border-radius:14px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+.qr p{
+margin-top:6px;
+font-size:12px;
+}
+
+.socials{
+
+margin-top:18px;
+
+display:flex;
+gap:16px;
+
+}
+
+.socials a{
+
+color:white;
+font-size:26px;
+
+transition:.3s;
+
+}
+
+.socials a:hover{
+
+transform:scale(1.25);
+color:#1fa3b8;
+
+}
+
+/* FORMULÁRIO DE LEAD */
+
+.leadbox{
+
+background:rgba(255,255,255,0.12);
+
+padding:15px;
+
+border-radius:15px;
+
+margin-top:12px;
+
+width:100%;
+
+}
+
+.leadbox input{
+
+width:100%;
+
+padding:8px;
+
+margin-bottom:8px;
+
+border:none;
+
+border-radius:8px;
+
+}
+
+.leadbox button{
+
+width:100%;
+
+padding:10px;
+
+background:#1fa3b8;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.leadbox button:hover{
+
+background:#158799;
+
+}
+
+/* POPUP SALVAR CONTATO */
+
+#saveContactPopup{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.7);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:999;
+
+}
+
+.popupCard{
+
+background:white;
+
+color:#333;
+
+padding:25px;
+
+border-radius:18px;
+
+width:300px;
+
+text-align:center;
+
+box-shadow:0 10px 40px rgba(0,0,0,0.3);
+
+}
+
+.popupButtons{
+
+margin-top:15px;
+
+display:flex;
+justify-content:center;
+
+gap:10px;
+
+}
+
+.btnSave{
+
+background:#1fa3b8;
+
+color:white;
+
+padding:10px 14px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+.btnClose{
+
+border:none;
+
+background:#ccc;
+
+padding:10px 14px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="saveContactPopup">
+
+<div class="popupCard">
+
+<h2>Adicionar contato</h2>
+
+<p>Deseja salvar o contato de <b>Eduardo Lobato</b>?</p>
+
+<div class="popupButtons">
+
+<a href="contato.vcf" class="btnSave">Salvar contato</a>
+
+<button onclick="fecharPopup()" class="btnClose">Agora não</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="seetech.svg" class="logo">
+
+<p class="subtitle">Serviços em Informática & Treinamentos</p>
+
+<img src="Fotorosto.jpg" class="avatar">
+
+<p class="name">Eduardo Bacarine Lobato</p>
+<p class="role">CEO & Diretor de Tecnologia</p>
+
+<div class="buttons">
+
+<a class="btn"
+href="https://api.whatsapp.com/send?phone=5511982160046">
+WhatsApp
+</a>
+
+<a class="btn" href="contato.vcf">
+Salvar contato
+</a>
+
+</div>
+
+<div class="leadbox">
+
+<input id="nome" placeholder="Seu nome">
+<input id="whatsapp" placeholder="Seu WhatsApp">
+<input id="email" placeholder="Seu e-mail">
+
+<button onclick="enviarLead()">Enviar</button>
+
+<p id="msg"></p>
+
+</div>
+
+<div class="qrcodes">
+
+<div class="qr">
+<div class="qrbox">
+<canvas id="siteQR"></canvas>
+</div>
+<p>Website</p>
+</div>
+
+<div class="qr">
+<div class="qrbox">
+<canvas id="whatsQR"></canvas>
+</div>
+<p>WhatsApp</p>
+</div>
+
+<div class="qr">
+<div class="qrbox">
+<canvas id="cardQR"></canvas>
+</div>
+<p>Cartão</p>
+</div>
+
+<div class="qr">
+<div class="qrbox">
+<canvas id="pixQR"></canvas>
+</div>
+<p>PIX</p>
+</div>
+
+</div>
+
+<div class="socials">
+
+<a href="https://www.facebook.com/eblseetech/">
+<i class="fab fa-facebook"></i>
+</a>
+
+<a href="https://www.instagram.com/prof_eduardolobato/">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://www.linkedin.com/in/eduardoblobato/">
+<i class="fab fa-linkedin"></i>
+</a>
+
+<a href="https://www.seetech.com.br">
+<i class="fa-solid fa-globe"></i>
+</a>
+
+<a href="mailto:eb.lobato74@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function fecharPopup(){
+document.getElementById("saveContactPopup").style.display="none"
+}
+
+/* QR CODES */
+
+const config={width:110,margin:1}
+
+QRCode.toCanvas(document.getElementById('siteQR'),
+'https://www.seetech.com.br',config)
+
+QRCode.toCanvas(document.getElementById('whatsQR'),
+'https://api.whatsapp.com/send?phone=5511982160046',config)
+
+QRCode.toCanvas(document.getElementById('cardQR'),
+'https://profeduardolobato.github.io/siteapostilas/interativo',config)
+
+QRCode.toCanvas(document.getElementById('pixQR'),
+'pix:254584598-14',config)
+
+/* ENVIO DE LEADS */
+
+function enviarLead(){
+
+let nome=document.getElementById("nome").value
+let whatsapp=document.getElementById("whatsapp").value
+let email=document.getElementById("email").value
+
+fetch("COLE_AQUI_URL_DO_GOOGLE_SCRIPT",{
+
+method:"POST",
+
+body:new URLSearchParams({
+nome:nome,
+whatsapp:whatsapp,
+email:email
+})
+
+}).then(res=>{
+document.getElementById("msg").innerText="Contato enviado!"
+})
+
+}
+
+/* PWA */
+
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker.register("sw.js")
+}
+
+</script>
+
+</body>
+</html>
